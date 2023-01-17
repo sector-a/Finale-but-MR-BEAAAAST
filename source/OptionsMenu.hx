@@ -14,6 +14,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import lime.utils.Assets;
 
 class OptionsMenu extends MusicBeatState
@@ -106,9 +107,11 @@ class OptionsMenu extends MusicBeatState
 		if (acceptInput)
 		{
 			if (controls.BACK && !isCat)
+			{
 				FlxG.camera.fade(FlxColor.BLACK, 1, false);
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-				FlxG.switchState(new Beastmenu()));
+			    new FlxTimer().start(1, function(tmr:FlxTimer)
+				    FlxG.switchState(new Beastmenu()));
+		    }
 			else if (controls.BACK)
 			{
 				isCat = false;
