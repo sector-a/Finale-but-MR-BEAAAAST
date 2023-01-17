@@ -57,6 +57,8 @@ class OptionsMenu extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		FlxG.mouse.visible = false;
+
 		instance = this;
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image("menuDesat"));
 
