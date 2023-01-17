@@ -30,8 +30,10 @@ class OptionsMenu extends MusicBeatState
 			new DownscrollOption("Change the layout of the strumline."),
 			new GhostTapOption("Ghost Tapping is when you tap a direction and it doesn't give you a miss."),
 			new Judgement("Customize your Hit Timings (LEFT or RIGHT)"),
+			#if windows
 			new FPSCapOption("Cap your FPS"),
 			new ScrollSpeedOption("Change your scroll speed (1 = Chart dependent)")
+			#end
 		]),
 		new OptionCategory("Appearance", [
 			new RainbowFPSOption("Make the FPS Counter Rainbow")
@@ -143,17 +145,59 @@ class OptionsMenu extends MusicBeatState
 				
 				if (currentSelectedCat.getOptions()[curSelected].getAccept())
 				{
-					if (controls.RIGHT_P)
+					if (FlxG.keys.pressed.SHIFT)
+						{
+							if (FlxG.keys.pressed.RIGHT)
+								currentSelectedCat.getOptions()[curSelected].right();
+							if (FlxG.keys.pressed.LEFT)
+								currentSelectedCat.getOptions()[curSelected].left();
+						}
+					else
+					{
+						if (FlxG.keys.justPressed.RIGHT)
+							currentSelectedCat.getOptions()[curSelected].right();
+						if (FlxG.keys.justPressed.LEFT)
+							currentSelectedCat.getOptions()[curSelected].left();
+					}
+				}
+				else
+				{
+
+					if (FlxG.keys.pressed.SHIFT)
+					{
+						if (FlxG.keys.justPressed.RIGHT)
+							FlxG.save.data.offset += 0.1;
+						else if (FlxG.keys.justPressed.LEFT)
+							FlxG.save.data.offset -= 0.1;
+					}
+					else if (FlxG.keys.pressed.RIGHT)
 						FlxG.save.data.offset += 0.1;
-					else if (controls.LEFT_P)
+					else if (FlxG.keys.pressed.LEFT)
 						FlxG.save.data.offset -= 0.1;
+					
+				
 				}
 				if (currentSelectedCat.getOptions()[curSelected].getAccept())
 					versionShit.text =  currentSelectedCat.getOptions()[curSelected].getValue() + " - Description - " + currentDescription;
 				else
 					versionShit.text = "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription;
-			}        
-       
+			}
+			else
+			{
+				if (FlxG.keys.pressed.SHIFT)
+					{
+						if (FlxG.keys.justPressed.RIGHT)
+							FlxG.save.data.offset += 0.1;
+						else if (FlxG.keys.justPressed.LEFT)
+							FlxG.save.data.offset -= 0.1;
+					}
+					else if (FlxG.keys.pressed.RIGHT)
+						FlxG.save.data.offset += 0.1;
+					else if (FlxG.keys.pressed.LEFT)
+						FlxG.save.data.offset -= 0.1;
+			}
+		
+
 			if (controls.RESET)
 					FlxG.save.data.offset = 0;
 
