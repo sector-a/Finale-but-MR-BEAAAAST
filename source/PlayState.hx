@@ -2455,7 +2455,9 @@ class PlayState extends MusicBeatState
 							}
 							else
 							{
+								if(!beast)
 								health -= 0.075;
+
 								vocals.volume = 0;
 								if (theFunne)
 									noteMiss(daNote.noteData, daNote);
@@ -2669,7 +2671,9 @@ class PlayState extends MusicBeatState
 					score = -300;
 					combo = 0;
 					misses++;
+					if(!beast)
 					health -= 0.2;
+
 					ss = false;
 					shits++;
 					if (FlxG.save.data.accuracyMod == 0)
@@ -2677,7 +2681,9 @@ class PlayState extends MusicBeatState
 				case 'bad':
 					daRating = 'bad';
 					score = 0;
+					if(!beast)
 					health -= 0.06;
+					
 					ss = false;
 					bads++;
 					if (FlxG.save.data.accuracyMod == 0)
