@@ -103,6 +103,8 @@ class Beastmenu extends MusicBeatState
     {
         #if windows
         FlxG.mouse.visible = true;
+        #else
+        FlxG.mouse.visible = false;
         #end
 
         if (FlxG.mouse.pressed && canClick)

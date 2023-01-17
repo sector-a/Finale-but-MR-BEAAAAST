@@ -1036,6 +1036,11 @@ class PlayState extends MusicBeatState
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
 
+		#if mobile
+		addHitbox(false);
+		addHitboxCamera();
+		#end
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1208,6 +1213,10 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = false;
 
+		#if mobile
+		hitbox.visible = true;
+		#end
+
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
@@ -1347,7 +1356,7 @@ class PlayState extends MusicBeatState
 		{
 			if(beast)
 			{
-		    video.playVideo(Paths.video('video.mp4'));				
+		    video.playVideo(#if mobile SUtil.getStorageDirectory() + #end Paths.video('video.mp4'));				
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0, false);
 			}
 			else
@@ -1878,7 +1887,7 @@ class PlayState extends MusicBeatState
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.text = "Score: " + songScore;
 
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		if (#if android FlxG.android.justReleased.BACK || #end FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2516,6 +2525,10 @@ class PlayState extends MusicBeatState
 		}
 		#end
 
+		#if mobile
+		removeHitbox();
+		#end
+
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
@@ -2571,7 +2584,9 @@ class PlayState extends MusicBeatState
 
 					if (SONG.validScore)
 					{
+						#if newgrounds
 						NGio.unlockMedal(60961);
+						#end
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
 

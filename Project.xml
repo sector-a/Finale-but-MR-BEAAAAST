@@ -75,7 +75,7 @@
 		NOT USING A DIRECT THING TO THE ASSET!!!
 	-->
 	<assets path="assets/fonts" embed='true'/>
-
+	<assets path="mobile" rename="assets/mobile" if="mobile" /> <!-- in order to not have the mobile assets in another builds -saw -->
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />
@@ -87,11 +87,12 @@
 
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
-	<haxelib name="newgrounds"/>
+	<haxelib name="newgrounds" unless="android"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="discord_rpc" if="windows"/>
 	<haxelib name="linc_luajit" if="windows"/>
-	<haxelib name="hxCodec" if="windows"/>
+	<haxelib name="extension-androidtools" if="android"/>
+	<haxelib name="hxCodec" if="windows || android"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
@@ -106,6 +107,33 @@
 
 	<!-- Show debug traces for hxCodec -->
     <haxedef name="HXC_DEBUG_TRACE" if="debug" />
+
+	<!--Always enable Null Object Reference check-->
+	<haxedef name="HXCPP_CHECK_POINTER" />
+	<haxedef name="HXCPP_STACK_LINE" />
+	<haxedef name="HXCPP_STACK_TRACE"/>
+
+	<section if="android">
+		<!--Permissions-->
+		<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
+		<config:android permission="android.permission.ACCESS_WIFI_STATE" />
+		<config:android permission="android.permission.INTERNET" />
+		<config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.READ_EXTERNAL_STORAGE" />
+		<config:android permission="android.permission.VIBRATE" />
+
+		<!--Gradle-->
+		<config:android gradle-version="7.6" gradle-plugin="7.3.1" />
+
+		<!--Audio Recording Fix-->
+		<config:android target-sdk-version="29" if="${lime <= 8.0.0}" />
+	</section>
+
+	<section if="ios">
+		<!--Dependency--> 
+		<dependency name="Metal.framework" />
+		<dependency name="WebKit.framework" />
+	</section>
 
 	<!-- _________________________________ Custom _______________________________ -->
 

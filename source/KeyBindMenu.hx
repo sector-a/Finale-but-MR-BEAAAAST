@@ -18,7 +18,9 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+#if newgrounds
 import io.newgrounds.NG;
+#end
 import lime.app.Application;
 import lime.utils.Assets;
 import flixel.math.FlxMath;
@@ -120,7 +122,7 @@ class KeyBindMenu extends FlxSubState
                     FlxG.sound.play(Paths.sound('scrollMenu'));
                     state = "input";
                 }
-                else if(FlxG.keys.justPressed.ESCAPE){
+                else if(#if android FlxG.android.justReleased.BACK || #end FlxG.keys.justPressed.ESCAPE){
                     quit();
                 }
 				else if (FlxG.keys.justPressed.BACKSPACE){
