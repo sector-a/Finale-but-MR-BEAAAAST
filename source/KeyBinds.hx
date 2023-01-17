@@ -25,20 +25,20 @@ class KeyBinds
 
     public static function keyCheck():Void
     {
-        if(FlxG.save.data.upBind != "F"){
-            FlxG.save.data.upBind = "F";
+        if(FlxG.save.data.upBind == null){
+            FlxG.save.data.upBind = "W";
             trace("No UP");
         }
-        if(FlxG.save.data.downBind != "J"){
-            FlxG.save.data.downBind = "J";
+        if(FlxG.save.data.downBind == null){
+            FlxG.save.data.downBind = "S";
             trace("No DOWN");
         }
-        if(FlxG.save.data.leftBind != "D"){
-            FlxG.save.data.leftBind = "D";
+        if(FlxG.save.data.leftBind == null){
+            FlxG.save.data.leftBind = "A";
             trace("No LEFT");
         }
-        if(FlxG.save.data.rightBind != "K"){
-            FlxG.save.data.rightBind = "K";
+        if(FlxG.save.data.rightBind == null){
+            FlxG.save.data.rightBind = "D";
             trace("No RIGHT");
         }
         if(FlxG.save.data.killBind == null){
