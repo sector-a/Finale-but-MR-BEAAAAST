@@ -152,8 +152,8 @@ class OptionsMenu extends MusicBeatState
 					versionShit.text =  currentSelectedCat.getOptions()[curSelected].getValue() + " - Description - " + currentDescription;
 				else
 					versionShit.text = "Offset (Left, Right, Shift for slow): " + HelperFunctions.truncateFloat(FlxG.save.data.offset,2) + " - Description - " + currentDescription;
-		
-
+			}        
+       
 			if (controls.RESET)
 					FlxG.save.data.offset = 0;
 
