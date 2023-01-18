@@ -1337,11 +1337,8 @@ class PlayState extends MusicBeatState
 		{
 			if(beast)
 			{
-		    video.playVideo(#if mobile SUtil.getStorageDirectory() + #end Paths.video('video.mp4'));				
-			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0, false);
-			}
-			else
-			{
+		    video.playVideo(#if mobile SUtil.getStorageDirectory() + #end Paths.video('video.mp4'));
+			video.bitmap.canUseSound = false;				
 		    FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 			}
 		}
