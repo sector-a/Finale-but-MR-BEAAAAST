@@ -132,8 +132,6 @@ class Ratings
     public static function CalculateRanking(accuracy:Float):String
     {
         return (!FlxG.save.data.botplay ?	
-        " Combo Breaks:" + PlayState.misses + 																			
-        " | Accuracy:" + (FlxG.save.data.botplay ? "N/A" : HelperFunctions.truncateFloat(accuracy, 2) + " %") +  				
-        " | " + GenerateLetterRank(accuracy) : ""); 																			
+        " Misses:" + PlayState.misses : ""); 																			
     }
 }

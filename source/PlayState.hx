@@ -975,8 +975,8 @@ class PlayState extends MusicBeatState
 		if (FlxG.save.data.downscroll)
 			kadeEngineWatermark.y = FlxG.height * 0.9 + 45;
 
-		scoreTxt = new FlxText(743, 25, 0, "", 20);
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+		scoreTxt = new FlxText(843, 25, 0, "", 30);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		//scoreTxt.x = playerStrums.x / 2;
 		if(FlxG.save.data.downscroll)
@@ -1219,6 +1219,8 @@ class PlayState extends MusicBeatState
 
 		var swagCounter:Int = 0;
 
+		if(!beast)
+		{
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
 			dad.dance();
@@ -1249,9 +1251,6 @@ class PlayState extends MusicBeatState
 					altSuffix = '-pixel';
 				}
 			}
-
-		if(!beast)
-		{
 			switch (swagCounter)
 			{
 				case 0:
@@ -1312,11 +1311,10 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
 				case 4:
 			}
-		}
-
 			swagCounter += 1;
 			// generateSong('fresh');
 		}, 5);
+	  }
 	}
 
 	var previousFrameTime:Int = 0;
@@ -1741,6 +1739,8 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.play();
 		Conductor.songPosition = FlxG.sound.music.time;
 		vocals.time = Conductor.songPosition;
+		if (video.bitmap.isSeekable && beast)
+			video.bitmap.position = FlxG.sound.music.time / FlxG.sound.music.length;
 		vocals.play();
 
 		#if windows
@@ -1870,7 +1870,7 @@ class PlayState extends MusicBeatState
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.text = "Score: " + songScore;
 
-		if (#if android FlxG.android.justReleased.BACK || #end FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		/*if (#if android FlxG.android.justReleased.BACK || #end FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -1886,7 +1886,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-		}
+		}*/
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
